@@ -224,104 +224,6 @@ function nextoolify_real_estate_widgets_init() {
 }
 add_action( 'widgets_init', 'nextoolify_real_estate_widgets_init' );
 
-/**
- * Enqueue scripts and styles.
- *
- * @since 1.0.0
- */
-function nextoolify_real_estate_scripts() {
-    // Get theme version
-    $theme_version = wp_get_theme()->get( 'Version' );
-
-    // Bootstrap 5 CSS
-    wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.3.2' );
-
-    // Swiper CSS
-    wp_enqueue_style( 'swiper-css', get_template_directory_uri() . '/assets/css/swiper.min.css', array(), '11.0.5' );
-
-    // AOS CSS
-    wp_enqueue_style( 'aos-css', get_template_directory_uri() . '/assets/css/aos.css', array(), '2.3.4' );
-
-    // Font Awesome
-    wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css', array(), '6.5.1' );
-
-    // Theme Style CSS
-    wp_enqueue_style( 'nextoolify-real-estate-style', get_stylesheet_uri(), array(), $theme_version );
-
-    // Responsive CSS
-    wp_enqueue_style( 'nextoolify-real-estate-responsive', get_template_directory_uri() . '/assets/css/responsive.css', array( 'nextoolify-real-estate-style' ), $theme_version );
-
-    // Bootstrap 5 JS
-    wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array(), '5.3.2', true );
-
-    // Swiper JS
-    wp_enqueue_script( 'swiper-js', get_template_directory_uri() . '/assets/js/swiper.min.js', array(), '11.0.5', true );
-
-    // AOS JS
-    wp_enqueue_script( 'aos-js', get_template_directory_uri() . '/assets/js/aos.js', array(), '2.3.4', true );
-
-    // Theme Main JS
-    wp_enqueue_script( 'nextoolify-real-estate-main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery', 'bootstrap-js' ), $theme_version, true );
-
-    // Localize script for AJAX
-    wp_localize_script( 'nextoolify-real-estate-main', 'nextoolifyRealEstate', array(
-        'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-        'nonce'   => wp_create_nonce( 'nextoolify_real_estate_nonce' ),
-        'strings' => array(
-            'loading' => esc_html__( 'Loading...', 'nextoolify-real-estate' ),
-            'error'   => esc_html__( 'An error occurred. Please try again.', 'nextoolify-real-estate' ),
-        ),
-    ) );
-
-    // Comment reply script
-    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-        wp_enqueue_script( 'comment-reply' );
-    }
-}
-add_action( 'wp_enqueue_scripts', 'nextoolify_real_estate_scripts' );
-
-/**
- * Enqueue admin styles and scripts.
- *
- * @since 1.0.0
- */
-function nextoolify_real_estate_admin_scripts() {
-    $theme_version = wp_get_theme()->get( 'Version' );
-    
-    wp_enqueue_style( 'nextoolify-real-estate-admin-style', get_template_directory_uri() . '/assets/css/admin-style.css', array(), $theme_version );
-}
-add_action( 'admin_enqueue_scripts', 'nextoolify_real_estate_admin_scripts' );
-
-/**
- * Enqueue editor styles and scripts.
- *
- * @since 1.0.0
- */
-function nextoolify_real_estate_editor_scripts() {
-    $theme_version = wp_get_theme()->get( 'Version' );
-
-    // Editor stylesheet
-    wp_enqueue_style( 'nextoolify-real-estate-editor-style', get_template_directory_uri() . '/assets/css/editor-style.css', array(), $theme_version );
-
-    // Bootstrap 5 CSS for editor
-    wp_enqueue_style( 'bootstrap-editor-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.3.2' );
-
-    // Font Awesome for editor
-    wp_enqueue_style( 'font-awesome-editor', get_template_directory_uri() . '/assets/css/font-awesome.min.css', array(), '6.5.1' );
-}
-add_action( 'enqueue_block_editor_assets', 'nextoolify_real_estate_editor_scripts' );
-
-/**
- * Customizer preview styles.
- *
- * @since 1.0.0
- */
-function nextoolify_real_estate_customizer_preview_styles() {
-    $theme_version = wp_get_theme()->get( 'Version' );
-    
-    wp_enqueue_style( 'nextoolify-real-estate-customizer', get_template_directory_uri() . '/assets/css/customizer.css', array(), $theme_version );
-}
-add_action( 'customize_preview_init', 'nextoolify_real_estate_customizer_preview_styles' );
 
 /**
  * Add preconnect for Google Fonts.
@@ -382,4 +284,38 @@ if ( file_exists( get_template_directory() . '/inc/helpers/layout-helpers.php' )
 if ( file_exists( get_template_directory() . '/inc/classes/class-theme.php' ) ) {
     require get_template_directory() . '/inc/classes/class-theme.php';
     Nextoolify_Real_Estate_Theme::get_instance();
+}
+
+/**
+ * Load component functions.
+ */
+if ( file_exists( get_template_directory() . '/template-parts/components/post-card.php' ) ) {
+    require get_template_directory() . '/template-parts/components/post-card.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/featured-image.php' ) ) {
+    require get_template_directory() . '/template-parts/components/featured-image.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/entry-meta.php' ) ) {
+    require get_template_directory() . '/template-parts/components/entry-meta.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/entry-footer.php' ) ) {
+    require get_template_directory() . '/template-parts/components/entry-footer.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/author-box.php' ) ) {
+    require get_template_directory() . '/template-parts/components/author-box.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/related-posts.php' ) ) {
+    require get_template_directory() . '/template-parts/components/related-posts.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/post-navigation.php' ) ) {
+    require get_template_directory() . '/template-parts/components/post-navigation.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/pagination.php' ) ) {
+    require get_template_directory() . '/template-parts/components/pagination.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/search-card.php' ) ) {
+    require get_template_directory() . '/template-parts/components/search-card.php';
+}
+if ( file_exists( get_template_directory() . '/template-parts/components/empty-state.php' ) ) {
+    require get_template_directory() . '/template-parts/components/empty-state.php';
 }

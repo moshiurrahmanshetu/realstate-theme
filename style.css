@@ -13,22 +13,3 @@ Tags: real-estate, property, estate, agency, broker, listing, custom-background,
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
-
-/* ============================================
-   CSS Imports
-   ============================================ */
-
-@import url('variables.css');
-@import url('base.css');
-@import url('typography.css');
-@import url('layout.css');
-@import url('header.css');
-@import url('navigation.css');
-@import url('footer.css');
-@import url('buttons.css');
-@import url('forms.css');
-@import url('cards.css');
-@import url('blog.css');
-@import url('widgets.css');
-@import url('utilities.css');
-@import url('animations.css');

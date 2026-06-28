@@ -36,55 +36,43 @@ $sidebar_position = nextoolify_get_sidebar_position();
                             <?php
                             if ( have_posts() ) :
                                 // Blog Header
-                                $archive_title = '';
-                                $archive_subtitle = '';
-
-                                if ( is_home() && ! is_front_page() ) {
-                                    $archive_title = get_the_title( get_option( 'page_for_posts' ) );
-                                }
-
-                                if ( ! empty( $archive_title ) ) :
+                                if ( is_home() && ! is_front_page() ) :
                                     ?>
                                     <header class="page-header">
-                                        <h1 class="page-title"><?php echo esc_html( $archive_title ); ?></h1>
+                                        <h1 class="page-title"><?php echo esc_html( get_the_title( get_option( 'page_for_posts' ) ) ); ?></h1>
                                     </header>
                                     <?php
                                 endif;
 
-                                // Blog Layout Classes
-                                $post_classes = array();
-                                if ( 'grid' === $blog_layout ) {
-                                    $post_classes[] = 'col-md-6';
-                                }
-
-                                // Start the loop
-                                echo '<div class="blog-posts ' . esc_attr( 'grid' === $blog_layout ? 'row' : '' ) . '">';
-
-                                while ( have_posts() ) :
-                                    the_post();
-
-                                    $post_class = implode( ' ', array_map( 'sanitize_html_class', $post_classes ) );
+                                // Blog Layout
+                                if ( 'grid' === $blog_layout ) :
                                     ?>
-                                    <article id="post-<?php the_ID(); ?>" <?php post_class( $post_class ); ?>>
+                                    <div class="row">
                                         <?php
-                                        // Load content template part
-                                        get_template_part( 'template-parts/content/content', get_post_format() );
+                                        while ( have_posts() ) :
+                                            the_post();
+                                            ?>
+                                            <div class="col-md-6">
+                                                <?php nextoolify_post_card( get_the_ID(), 'grid' ); ?>
+                                            </div>
+                                            <?php
+                                        endwhile;
                                         ?>
-                                    </article><!-- #post-<?php the_ID(); ?> -->
+                                    </div>
                                     <?php
-                                endwhile;
+                                else :
+                                    while ( have_posts() ) :
+                                        the_post();
+                                        nextoolify_post_card( get_the_ID(), 'list' );
+                                    endwhile;
+                                endif;
 
-                                echo '</div><!-- .blog-posts -->';
-
-                                // Pagination
-                                the_posts_pagination( array(
-                                    'prev_text' => '<span class="screen-reader-text">' . esc_html__( 'Previous page', 'nextoolify-real-estate' ) . '</span>',
-                                    'next_text' => '<span class="screen-reader-text">' . esc_html__( 'Next page', 'nextoolify-real-estate' ) . '</span>',
-                                ) );
+                                // Pagination using component
+                                nextoolify_pagination();
 
                             else :
-                                // No posts found
-                                get_template_part( 'template-parts/content/content', 'none' );
+                                // No posts found using component
+                                nextoolify_empty_state( 'no-posts' );
                             endif;
                             ?>
                         </div><!-- .content-area -->

@@ -16,6 +16,7 @@ get_header();
 
 $sidebar_position = nextoolify_get_sidebar_position();
 $blog_layout = nextoolify_get_blog_layout();
+$search_query = get_search_query();
 ?>
 
     <main id="primary" class="site-main">
@@ -42,57 +43,42 @@ $blog_layout = nextoolify_get_blog_layout();
                                         <?php
                                         printf(
                                             esc_html__( 'Search Results for: %s', 'nextoolify-real-estate' ),
-                                            '<span>' . get_search_query() . '</span>'
+                                            '<span>' . esc_html( $search_query ) . '</span>'
                                         );
                                         ?>
                                     </h1>
                                 </header>
 
                                 <?php
-                                // Blog Layout Classes
-                                $post_classes = array();
-                                if ( 'grid' === $blog_layout ) {
-                                    $post_classes[] = 'col-md-6';
-                                }
-
-                                // Start the loop
-                                echo '<div class="blog-posts ' . esc_attr( 'grid' === $blog_layout ? 'row' : '' ) . '">';
-
-                                while ( have_posts() ) :
-                                    the_post();
-
-                                    $post_class = implode( ' ', array_map( 'sanitize_html_class', $post_classes ) );
+                                // Blog Layout
+                                if ( 'grid' === $blog_layout ) :
                                     ?>
-                                    <article id="post-<?php the_ID(); ?>" <?php post_class( $post_class ); ?>>
+                                    <div class="row">
                                         <?php
-                                        // Load content template part
-                                        get_template_part( 'template-parts/content/content', get_post_format() );
+                                        while ( have_posts() ) :
+                                            the_post();
+                                            ?>
+                                            <div class="col-md-6">
+                                                <?php nextoolify_search_card( get_the_ID(), $search_query ); ?>
+                                            </div>
+                                            <?php
+                                        endwhile;
                                         ?>
-                                    </article><!-- #post-<?php the_ID(); ?> -->
+                                    </div>
                                     <?php
-                                endwhile;
+                                else :
+                                    while ( have_posts() ) :
+                                        the_post();
+                                        nextoolify_search_card( get_the_ID(), $search_query );
+                                    endwhile;
+                                endif;
 
-                                echo '</div><!-- .blog-posts -->';
-
-                                // Pagination
-                                the_posts_pagination( array(
-                                    'prev_text' => '<span class="screen-reader-text">' . esc_html__( 'Previous page', 'nextoolify-real-estate' ) . '</span>',
-                                    'next_text' => '<span class="screen-reader-text">' . esc_html__( 'Next page', 'nextoolify-real-estate' ) . '</span>',
-                                ) );
+                                // Pagination using component
+                                nextoolify_pagination();
 
                             else :
-                                // No results
-                                ?>
-                                <header class="page-header">
-                                    <h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'nextoolify-real-estate' ); ?></h1>
-                                </header>
-
-                                <div class="no-results not-found">
-                                    <p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'nextoolify-real-estate' ); ?></p>
-
-                                    <?php get_search_form(); ?>
-                                </div><!-- .no-results -->
-                                <?php
+                                // No results using component
+                                nextoolify_empty_state( 'no-results' );
                             endif;
                             ?>
                         </div><!-- .content-area -->

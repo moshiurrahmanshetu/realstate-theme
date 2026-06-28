@@ -94,47 +94,33 @@ class Nextoolify_Real_Estate_Assets {
      * @return void
      */
     private function register_frontend_styles() {
-        wp_register_style(
-            'bootstrap-css',
-            get_template_directory_uri() . '/assets/css/bootstrap.min.css',
-            array(),
-            '5.3.2'
+        // Register modular CSS files
+        $css_files = array(
+            'variables',
+            'base',
+            'typography',
+            'layout',
+            'header',
+            'navigation',
+            'footer',
+            'buttons',
+            'forms',
+            'cards',
+            'blog',
+            'widgets',
+            'utilities',
+            'animations',
+            'responsive',
         );
 
-        wp_register_style(
-            'swiper-css',
-            get_template_directory_uri() . '/assets/css/swiper.min.css',
-            array(),
-            '11.0.5'
-        );
-
-        wp_register_style(
-            'aos-css',
-            get_template_directory_uri() . '/assets/css/aos.css',
-            array(),
-            '2.3.4'
-        );
-
-        wp_register_style(
-            'font-awesome',
-            get_template_directory_uri() . '/assets/css/font-awesome.min.css',
-            array(),
-            '6.5.1'
-        );
-
-        wp_register_style(
-            'nextoolify-real-estate-style',
-            get_stylesheet_uri(),
-            array(),
-            $this->version
-        );
-
-        wp_register_style(
-            'nextoolify-real-estate-responsive',
-            get_template_directory_uri() . '/assets/css/responsive.css',
-            array( 'nextoolify-real-estate-style' ),
-            $this->version
-        );
+        foreach ( $css_files as $file ) {
+            wp_register_style(
+                'nextoolify-' . $file,
+                get_template_directory_uri() . '/assets/css/' . $file . '.css',
+                array(),
+                $this->version
+            );
+        }
     }
 
     /**
@@ -144,12 +130,27 @@ class Nextoolify_Real_Estate_Assets {
      * @return void
      */
     private function enqueue_frontend_styles() {
-        wp_enqueue_style( 'bootstrap-css' );
-        wp_enqueue_style( 'swiper-css' );
-        wp_enqueue_style( 'aos-css' );
-        wp_enqueue_style( 'font-awesome' );
-        wp_enqueue_style( 'nextoolify-real-estate-style' );
-        wp_enqueue_style( 'nextoolify-real-estate-responsive' );
+        $css_files = array(
+            'variables',
+            'base',
+            'typography',
+            'layout',
+            'header',
+            'navigation',
+            'footer',
+            'buttons',
+            'forms',
+            'cards',
+            'blog',
+            'widgets',
+            'utilities',
+            'animations',
+            'responsive',
+        );
+
+        foreach ( $css_files as $file ) {
+            wp_enqueue_style( 'nextoolify-' . $file );
+        }
     }
 
     /**
@@ -159,34 +160,11 @@ class Nextoolify_Real_Estate_Assets {
      * @return void
      */
     private function register_frontend_scripts() {
+        // Customizer script
         wp_register_script(
-            'bootstrap-js',
-            get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js',
-            array(),
-            '5.3.2',
-            true
-        );
-
-        wp_register_script(
-            'swiper-js',
-            get_template_directory_uri() . '/assets/js/swiper.min.js',
-            array(),
-            '11.0.5',
-            true
-        );
-
-        wp_register_script(
-            'aos-js',
-            get_template_directory_uri() . '/assets/js/aos.js',
-            array(),
-            '2.3.4',
-            true
-        );
-
-        wp_register_script(
-            'nextoolify-real-estate-main',
-            get_template_directory_uri() . '/assets/js/main.js',
-            array( 'jquery', 'bootstrap-js' ),
+            'nextoolify-customizer',
+            get_template_directory_uri() . '/assets/js/customizer.js',
+            array( 'jquery' ),
             $this->version,
             true
         );
@@ -199,21 +177,6 @@ class Nextoolify_Real_Estate_Assets {
      * @return void
      */
     private function enqueue_frontend_scripts() {
-        wp_enqueue_script( 'bootstrap-js' );
-        wp_enqueue_script( 'swiper-js' );
-        wp_enqueue_script( 'aos-js' );
-        wp_enqueue_script( 'nextoolify-real-estate-main' );
-
-        // Localize script
-        wp_localize_script( 'nextoolify-real-estate-main', 'nextoolifyRealEstate', array(
-            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-            'nonce'   => wp_create_nonce( 'nextoolify_real_estate_nonce' ),
-            'strings' => array(
-                'loading' => esc_html__( 'Loading...', 'nextoolify-real-estate' ),
-                'error'   => esc_html__( 'An error occurred. Please try again.', 'nextoolify-real-estate' ),
-            ),
-        ) );
-
         // Comment reply
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );
@@ -233,20 +196,6 @@ class Nextoolify_Real_Estate_Assets {
             array(),
             $this->version
         );
-
-        wp_enqueue_style(
-            'bootstrap-editor-css',
-            get_template_directory_uri() . '/assets/css/bootstrap.min.css',
-            array(),
-            '5.3.2'
-        );
-
-        wp_enqueue_style(
-            'font-awesome-editor',
-            get_template_directory_uri() . '/assets/css/font-awesome.min.css',
-            array(),
-            '6.5.1'
-        );
     }
 
     /**
@@ -257,12 +206,10 @@ class Nextoolify_Real_Estate_Assets {
      * @return void
      */
     public function enqueue_admin_assets( $hook ) {
-        wp_enqueue_style(
-            'nextoolify-real-estate-admin-style',
-            get_template_directory_uri() . '/assets/css/admin-style.css',
-            array(),
-            $this->version
-        );
+        // Only load on theme settings pages
+        if ( 'appearance_page_theme-options' !== $hook && 'themes.php' !== $hook ) {
+            return;
+        }
     }
 
     /**
@@ -272,11 +219,12 @@ class Nextoolify_Real_Estate_Assets {
      * @return void
      */
     public function enqueue_customizer_assets() {
-        wp_enqueue_style(
-            'nextoolify-real-estate-customizer',
-            get_template_directory_uri() . '/assets/css/customizer.css',
-            array(),
-            $this->version
+        wp_enqueue_script(
+            'nextoolify-customizer',
+            get_template_directory_uri() . '/assets/js/customizer.js',
+            array( 'jquery', 'customize-preview' ),
+            $this->version,
+            true
         );
     }
 
