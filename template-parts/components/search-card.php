@@ -33,7 +33,7 @@ function nextoolify_search_card( $post_id = null, $search_query = '' ) {
 
     // Highlight search query in title
     if ( ! empty( $search_query ) ) {
-        $title = preg_replace( '/(' . preg_quote( $search_query, '/' ) . ')/i', '<mark>$1</mark>', $title );
+        $title = preg_replace( '/(' . preg_quote( $search_query, '/' ) . ')/i', '<mark>$1</mark>', esc_html( $title ) );
     }
     ?>
     <article id="post-<?php echo esc_attr( $post_id ); ?>" <?php post_class( 'search-result-card card' ); ?>>

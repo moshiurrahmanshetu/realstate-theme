@@ -33,7 +33,8 @@ function nextoolify_entry_footer( $post_id = null ) {
         <?php if ( $show_tags && has_tag( '', $post_id ) ) : ?>
             <div class="entry-tags">
                 <?php
-                the_tags( '<span class="tags-label">' . esc_html__( 'Tags:', 'nextoolify-real-estate' ) . '</span> ', ', ', '' );
+                $tags_list = get_the_tag_list( '<span class="tags-label">' . esc_html__( 'Tags:', 'nextoolify-real-estate' ) . '</span> ', ', ', '', $post_id );
+                echo wp_kses_post( $tags_list );
                 ?>
             </div>
         <?php endif; ?>

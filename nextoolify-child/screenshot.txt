@@ -1,0 +1,22 @@
+SCREENSHOT SPECIFICATION
+=======================
+
+File Name: screenshot.png
+Dimensions: 1200x900 pixels
+Format: PNG
+File Size: Under 500KB
+
+Content Guidelines:
+- Show the theme's homepage or a representative layout
+- Use high-quality, professional imagery
+- Include the theme name/logo if applicable
+- Ensure the screenshot is clear and not blurry
+- Use a standard WordPress installation for the screenshot
+- Avoid showing sensitive information or placeholder content
+
+Recommended Tools:
+- Use screenshot tools like Snagit, Lightshot, or built-in OS screenshot tools
+- Optimize the image using tools like TinyPNG or ImageOptim
+- Ensure the image represents the theme's design and features
+
+Note: This file is a specification. Create an actual screenshot.png file following these guidelines.

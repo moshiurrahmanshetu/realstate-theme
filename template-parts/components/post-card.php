@@ -60,7 +60,7 @@ function nextoolify_post_card( $post_id = null, $layout = 'grid' ) {
 
         <div class="card-body">
             <?php
-            the_title( sprintf( '<h3 class="card-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post_id ) ) ), '</a></h3>' );
+            the_title( sprintf( '<h3 class="card-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post_id ) ) ), '</a></h3>', $post_id );
 
             if ( $show_meta ) {
                 ?>

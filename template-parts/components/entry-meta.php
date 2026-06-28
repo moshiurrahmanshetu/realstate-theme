@@ -62,7 +62,7 @@ function nextoolify_entry_meta( $options = array(), $post_id = null ) {
         $meta_items[] = sprintf(
             '<span class="posted-on"><a href="%1$s" rel="bookmark">%2$s</a></span>',
             esc_url( get_permalink( $post_id ) ),
-            $time_string
+            wp_kses_post( $time_string )
         );
     }
 
@@ -72,7 +72,7 @@ function nextoolify_entry_meta( $options = array(), $post_id = null ) {
         if ( $categories_list ) {
             $meta_items[] = sprintf(
                 '<span class="cat-links">%s</span>',
-                $categories_list
+                wp_kses_post( $categories_list )
             );
         }
     }
@@ -83,7 +83,7 @@ function nextoolify_entry_meta( $options = array(), $post_id = null ) {
         if ( $tags_list ) {
             $meta_items[] = sprintf(
                 '<span class="tags-links">%s</span>',
-                $tags_list
+                wp_kses_post( $tags_list )
             );
         }
     }
@@ -94,9 +94,11 @@ function nextoolify_entry_meta( $options = array(), $post_id = null ) {
         $meta_items[] = sprintf(
             '<span class="comments-link"><a href="%1$s">%2$s</a></span>',
             esc_url( get_comments_link( $post_id ) ),
-            sprintf(
-                _n( '%s Comment', '%s Comments', $comments_count, 'nextoolify-real-estate' ),
-                number_format_i18n( $comments_count )
+            wp_kses_post(
+                sprintf(
+                    _n( '%s Comment', '%s Comments', $comments_count, 'nextoolify-real-estate' ),
+                    number_format_i18n( $comments_count )
+                )
             )
         );
     }

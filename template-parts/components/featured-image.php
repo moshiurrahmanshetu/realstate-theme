@@ -35,7 +35,7 @@ function nextoolify_featured_image( $post_id = null, $size = 'large', $lazy_load
     $loading_attr = $lazy_load ? 'loading="lazy"' : '';
     ?>
     <div class="post-thumbnail">
-        <a href="<?php the_permalink( $post_id ); ?>" aria-label="<?php printf( esc_attr__( 'View %s', 'nextoolify-real-estate' ), get_the_title( $post_id ) ); ?>">
+        <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" aria-label="<?php printf( esc_attr__( 'View %s', 'nextoolify-real-estate' ), get_the_title( $post_id ) ); ?>">
             <?php
             the_post_thumbnail( $post_id, $size, array(
                 'class'    => 'img-fluid',

@@ -104,7 +104,7 @@ function nextoolify_real_estate_posted_on() {
         '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
     );
 
-    echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo '<span class="posted-on">' . $posted_on . '</span>';
 }
 
 /**
@@ -119,7 +119,7 @@ function nextoolify_real_estate_posted_by() {
         '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
     );
 
-    echo '<span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo '<span class="byline"> ' . $byline . '</span>';
 }
 
 /**
@@ -134,14 +134,14 @@ function nextoolify_real_estate_entry_footer() {
         $categories_list = get_the_category_list( esc_html__( ', ', 'nextoolify-real-estate' ) );
         if ( $categories_list ) {
             /* translators: 1: List of categories. */
-            printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'nextoolify-real-estate' ) . '</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'nextoolify-real-estate' ) . '</span>', $categories_list );
         }
 
         /* translators: Used between list items, there is a space after the comma. */
         $tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'nextoolify-real-estate' ) );
         if ( $tags_list ) {
             /* translators: 1: List of tags. */
-            printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'nextoolify-real-estate' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'nextoolify-real-estate' ) . '</span>', $tags_list );
         }
     }
 
