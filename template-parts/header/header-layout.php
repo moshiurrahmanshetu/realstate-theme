@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-$header_layout = nextoolify_get_header_layout();
+$header_layout = class_exists( 'Nextoolify_Real_Estate_Customizer' ) ? Nextoolify_Real_Estate_Customizer::get_header_layout() : 'default';
 $is_sticky = class_exists( 'Nextoolify_Real_Estate_Customizer' ) ? Nextoolify_Real_Estate_Customizer::is_sticky_header_enabled() : true;
 $is_transparent = class_exists( 'Nextoolify_Real_Estate_Customizer' ) ? Nextoolify_Real_Estate_Customizer::get_option( 'nextoolify_transparent_header', false ) : false;
 

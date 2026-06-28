@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-$footer_layout = nextoolify_get_footer_layout();
+$footer_layout = class_exists( 'Nextoolify_Real_Estate_Customizer' ) ? Nextoolify_Real_Estate_Customizer::get_footer_layout() : 'default';
 $footer_classes = array( 'site-footer' );
 $footer_classes[] = 'footer-' . sanitize_html_class( $footer_layout );
 ?>

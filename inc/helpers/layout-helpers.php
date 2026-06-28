@@ -296,6 +296,21 @@ function nextoolify_get_layout_type() {
 }
 
 /**
+ * Get blog layout
+ *
+ * Returns the blog layout from customizer settings.
+ *
+ * @since 1.0.0
+ * @return string
+ */
+function nextoolify_get_blog_layout() {
+    if ( class_exists( 'Nextoolify_Real_Estate_Customizer' ) ) {
+        return Nextoolify_Real_Estate_Customizer::get_blog_layout();
+    }
+    return 'grid';
+}
+
+/**
  * Get responsive breakpoint class
  *
  * Returns responsive classes for different breakpoints.

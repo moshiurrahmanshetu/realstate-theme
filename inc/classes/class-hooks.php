@@ -64,30 +64,9 @@ class Nextoolify_Real_Estate_Hooks {
      * @return void
      */
     private function register_default_hooks() {
-        // Header hooks
-        $this->add_action( 'nextoolify_header_before', 'nextoolify_header_before', 10 );
-        $this->add_action( 'nextoolify_header_top', 'nextoolify_header_top', 10 );
-        $this->add_action( 'nextoolify_header_main', 'nextoolify_header_main', 10 );
-        $this->add_action( 'nextoolify_header_bottom', 'nextoolify_header_bottom', 10 );
-        $this->add_action( 'nextoolify_header_after', 'nextoolify_header_after', 10 );
-
-        // Content hooks
-        $this->add_action( 'nextoolify_content_before', 'nextoolify_content_before', 10 );
-        $this->add_action( 'nextoolify_content_top', 'nextoolify_content_top', 10 );
-        $this->add_action( 'nextoolify_content_main', 'nextoolify_content_main', 10 );
-        $this->add_action( 'nextoolify_content_bottom', 'nextoolify_content_bottom', 10 );
-        $this->add_action( 'nextoolify_content_after', 'nextoolify_content_after', 10 );
-
-        // Footer hooks
-        $this->add_action( 'nextoolify_footer_before', 'nextoolify_footer_before', 10 );
-        $this->add_action( 'nextoolify_footer_top', 'nextoolify_footer_top', 10 );
-        $this->add_action( 'nextoolify_footer_main', 'nextoolify_footer_main', 10 );
-        $this->add_action( 'nextoolify_footer_bottom', 'nextoolify_footer_bottom', 10 );
-        $this->add_action( 'nextoolify_footer_after', 'nextoolify_footer_after', 10 );
-
-        // Sidebar hooks
-        $this->add_action( 'nextoolify_sidebar_before', 'nextoolify_sidebar_before', 10 );
-        $this->add_action( 'nextoolify_sidebar_after', 'nextoolify_sidebar_after', 10 );
+        // Hooks are available for child themes and plugins to use
+        // No default callbacks are registered by the parent theme
+        // This prevents fatal errors from non-existent callback functions
     }
 
     /**
