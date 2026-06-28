@@ -349,10 +349,10 @@ function nextoolify_real_estate_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'nextoolify_real_estate_resource_hints', 10, 2 );
 
 /**
- * Implement the Custom Header feature.
+ * Load customizer autoload system.
  */
-if ( file_exists( get_template_directory() . '/inc/customizer/header-customizer.php' ) ) {
-    require get_template_directory() . '/inc/customizer/header-customizer.php';
+if ( file_exists( get_template_directory() . '/inc/customizer/autoload.php' ) ) {
+    require get_template_directory() . '/inc/customizer/autoload.php';
 }
 
 /**
@@ -370,8 +370,8 @@ if ( file_exists( get_template_directory() . '/inc/helpers/template-helpers.php'
 }
 
 /**
- * Load customizer settings.
+ * Layout helper functions.
  */
-if ( file_exists( get_template_directory() . '/customizer.php' ) ) {
-    require get_template_directory() . '/customizer.php';
+if ( file_exists( get_template_directory() . '/inc/helpers/layout-helpers.php' ) ) {
+    require get_template_directory() . '/inc/helpers/layout-helpers.php';
 }
