@@ -375,3 +375,11 @@ if ( file_exists( get_template_directory() . '/inc/helpers/template-helpers.php'
 if ( file_exists( get_template_directory() . '/inc/helpers/layout-helpers.php' ) ) {
     require get_template_directory() . '/inc/helpers/layout-helpers.php';
 }
+
+/**
+ * Initialize theme class.
+ */
+if ( file_exists( get_template_directory() . '/inc/classes/class-theme.php' ) ) {
+    require get_template_directory() . '/inc/classes/class-theme.php';
+    Nextoolify_Real_Estate_Theme::get_instance();
+}
